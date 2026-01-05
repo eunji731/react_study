@@ -205,5 +205,5 @@ class Modal2 extends React.Component {
 
   }
 }
-
+// git 연동 확인
 export default App
