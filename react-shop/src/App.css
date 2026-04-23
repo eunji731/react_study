@@ -1,0 +1,27 @@
+.main-bg {
+  height: 200px;
+  background-image: url('./assets/bg_2.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.img1 {
+  height: 400px;
+  background-image: url('./assets/img1.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.img2 {
+  height: 400px;
+  background-image: url('./assets/img2.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.img3 {
+  height: 400px;
+  background-image: url('./assets/img3.png');
+  background-size: cover;
+  background-position: center;
+}
