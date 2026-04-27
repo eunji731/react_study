@@ -4,6 +4,7 @@ import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
 import bongsdata from './data';
 import { Routes, Route, Link, useNavigate, Outlet, useParams } from "react-router-dom"
 import styled from 'styled-components'
+import axios from 'axios';
 
 let YellowBtn = styled.button` 
   background-color : ${props => props.bg}; 
@@ -17,7 +18,7 @@ let Box = styled.div`
 
 
 function App() {
-  let [bongs] = useState(bongsdata);
+  let [bongs, setBongs] = useState(bongsdata);
 
   function BongCard(props) {
     const navigate = useNavigate();
@@ -47,7 +48,27 @@ function App() {
             }
             )}
           </Row>
-        </div>
+          <button onClick={() => {
+            axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((result) => {
+                console.log(result)
+                //setBongs((prev) => { return [...prev, ...result.data]; });
+                let copy = [...bongs, ...result.data]
+                setBongs(copy);
+                console.log('setBongs 호출 후 copy:', copy);
+              })
+              .catch(() => {
+                console.log('ajax 에러남')
+              })
+
+            // axios.post('/sasasa', { name: 'bong bong' }) : axios의 post 요청
+            // Promise.all( [axios.get('URL1'), axios.get('URL2')] ) : 동시에 AJAX 요청 여러개 날리려면 - 이러면 URL1, URL2로 GET요청을 동시에 - 둘 다 완료시 특정 코드를 실행하고 싶으면 .then() 뒤에 붙이면 됨
+            // json : 원래 서버와 문자자료만 주고받을 수 있음(object/array 이런거 못주고받음) -> object/array 자료에 따옴표를 쳐놓으면 됨 ( "{"name" : "kim"}" )
+            // axios : axios 라이브러리는 JSON -> object/array 변환작업을 자동으로 해줘서 출력해보면 object/array가 나옴
+            // fetch('URL').then(결과 => 결과.json()).then((결과) => { console.log(결과) } ) : (쌩 JS문법)fetch는 json 문자료를 object/array로 자동변환 안해줌
+
+          }}>더보기</button>
+        </div >
       </>
     )
   }
